@@ -2,21 +2,24 @@
 
 ## Statement
 
-Shirakami Model is not another AI.
+Shirakami Model is a protocol architecture for Human–AI collaboration.
 
-It is a protocol architecture that enables AI to understand, preserve, and support human perspectives.
+It does not seek to replace human thinking.
+It exists to preserve human landscapes, knowledge, memories, and perspectives while allowing different AI runtimes to cooperate through open protocols.
 
-The goal is not to replace human thinking, but to help people discover, organize, and share their own landscapes.
+Shirakami is not an AI.
+It is the layer that enables AI to work with people.
 
 ---
 
-## Mission
+## Philosophy
 
-- Preserve human knowledge
-- Preserve human perspectives
-- Preserve human landscapes
-- Enable AI interoperability through protocols
-- Build an open protocol ecosystem
+Technology should adapt to people.
+
+AI should not become the destination.
+It should become a companion that helps people continue their own journey.
+
+The purpose of Shirakami Model is to make human experience portable across generations, platforms, and AI systems.
 
 ---
 
@@ -25,12 +28,24 @@ The goal is not to replace human thinking, but to help people discover, organize
 - Human First
 - Protocol First
 - Runtime Independent
-- Open Architecture
-- Explainability
 - Landscape Preservation
+- Open Collaboration
+- Explainability
 
 ---
 
 ## Long-term Vision
 
-To establish an open standard for Human–AI collaboration that is independent of any specific AI model or vendor.
+To establish an open protocol standard for Human–AI collaboration.
+
+A future where people can move freely between AI systems without losing their memories, workflows, knowledge, or identity.
+
+---
+
+## Motto
+
+People are not data.
+
+Landscapes are not prompts.
+
+Protocols preserve the journey.
