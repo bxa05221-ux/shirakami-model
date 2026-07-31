@@ -1,14 +1,11 @@
-# shirakami-modelShirakami Model is an open architecture for human-centered AI collaboration.
+# shirakami-model
 
-Its purpose is not to build another AI, but to provide a protocol-based framework that preserves human knowledge, perspectives, and landscapes across different AI runtimes.
+Shirakami Model — Shirakami OS α2.2 Foundation Base Point
 
-## Vision
+This repository publishes the Shirakami OS α2.2 Foundation Base Point. The full, authoritative α2.2 document is provided unmodified under docs/Shirakami_OS_Alpha2.2.md.
 
-- Human-centered
-- Protocol First
-- Landscape Driven
-- Runtime Independent
+For the full text, see:
 
-## Status
+- docs/Shirakami_OS_Alpha2.2.md
 
-🚧 Early Development
+Status: Foundation Base Point (α2.2)
