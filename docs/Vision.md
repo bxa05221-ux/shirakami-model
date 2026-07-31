@@ -1,3 +1,7 @@
+Shirakami is named after the Shirakami-Sanchi World Heritage Site.
+
+As Shirakami-Sanchi preserves an ancient ecosystem shaped over thousands of years, the Shirakami Project aims to preserve the landscapes of human experience, knowledge, relationships, and perspectives across changing generations of technology.
+
 # Shirakami Model Vision
 
 ## Statement
