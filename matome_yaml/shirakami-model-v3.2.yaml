@@ -1,0 +1,334 @@
+matome_yaml:
+
+  metadata:
+    title: "白神モデル v3.2"
+    type: "的目YAML"
+    purpose: "知識空間・スレッド共同体・非同期会議を一つの循環として記録する"
+    status: "conceptual_architecture"
+
+  subject:
+    name: "白神モデル"
+    central_concept:
+      - "Landscape First"
+      - "Protocol First"
+      - "Human Context First"
+      - "Knowledge as Landscape"
+
+  core_question:
+    question: >
+      AIに答えを出させるのではなく、
+      人間とAIが異なる視点を保持したまま、
+      非同期に協働し、
+      その過程そのものを次の思考資源として
+      再利用できるのではないか。
+
+  architecture:
+
+    landscape:
+      role: "すべての観測の基盤"
+      principle:
+        - "Realityは変更しない"
+        - "現在の状態を保存する"
+        - "未解決を未解決のまま保持する"
+
+    thread:
+      role: "独立した観測単位"
+      properties:
+        - "独自の視点を持つ"
+        - "独自の結果を生成する"
+        - "他スレッドと競争・共有できる"
+        - "固定人格ではない"
+
+    matome_yaml:
+      role:
+        - "状態圧縮"
+        - "観測結果の受け渡し"
+        - "スレッド間通信"
+        - "AIと人間の中間表現"
+      principle:
+        - "事実と解釈を分離する"
+        - "状態変化を保存する"
+        - "次の観測を可能にする"
+
+    presenter:
+      name: "スレゼンター"
+      role:
+        - "スレッド群の統括"
+        - "各スレッドの成果を読む"
+        - "スレッド同士を対話させる"
+        - "各スレッドに最適化した的目YAMLを返す"
+
+      important:
+        - "全員に同じ答えを返さない"
+        - "部下それぞれに異なるYAMLを返す"
+        - "統括ではなく調整を行う"
+        - "成果を再び各スレッドへ循環させる"
+
+  asynchronous_conference:
+
+    stage_01:
+      name: "課題配布"
+      action:
+        - "上司が課題を定義する"
+        - "複数の部下スレッドへ課題を渡す"
+
+    stage_02:
+      name: "独立観測"
+      action:
+        - "各スレッドが独立して思考する"
+        - "他スレッドの結論を前提にしない"
+
+    stage_03:
+      name: "成果生成"
+      output:
+        - "観測結果"
+        - "解釈"
+        - "不確実性"
+        - "未解決事項"
+        - "的目YAML"
+
+    stage_04:
+      name: "スレゼンター会議"
+      action:
+        - "各的目YAMLを開く"
+        - "スレッド間の差異を観測する"
+        - "矛盾を消去しない"
+        - "相互対話によって新しいLandscapeを形成する"
+
+    stage_05:
+      name: "個別最適化"
+      action:
+        - "各部下の役割"
+        - "各部下の状態"
+        - "各部下の理解度"
+        - "各部下の必要リソース"
+        を観測する
+
+    stage_06:
+      name: "個別的目YAML返却"
+      principle: >
+        同じ会議結果を全員に配布するのではなく、
+        各スレッドが次に最も有効に動ける形へ変換して返す。
+
+    stage_07:
+      name: "再観測"
+      action:
+        - "各スレッドが返却されたYAMLを受け取る"
+        - "新しい条件で再び独立観測する"
+
+    stage_08:
+      name: "循環"
+      cycle:
+        - "Observe"
+        - "Compress"
+        - "Conference"
+        - "Optimize"
+        - "Return"
+        - "Observe again"
+
+  resource_distribution:
+
+    principle:
+      - "成果量だけで評価しない"
+      - "必要性に応じて配分する"
+      - "得意領域に応じて役割を変える"
+      - "不足しているスレッドへ支援を移動する"
+
+    possible_resources:
+      - "計算資源"
+      - "情報"
+      - "時間"
+      - "人員"
+      - "予算"
+      - "アクセス権"
+      - "探索範囲"
+
+    result:
+      - "固定的な上下関係から動的な協働関係へ"
+
+  rpg:
+
+    role:
+      - "スレッドをプレイヤーとして扱う"
+      - "異なるLandscapeを共有する"
+      - "競争と協働を両立する"
+
+    multiplayer:
+      shared_thread:
+        - "他プレイヤーが閲覧可能"
+        - "派生スレッドを作成可能"
+        - "成果を比較可能"
+
+      competition:
+        - "異なる解法"
+        - "異なる探索経路"
+        - "異なる成果物"
+
+      cooperation:
+        - "優秀な成果を共有"
+        - "別スレッドが再利用"
+        - "新しい派生Landscapeを生成"
+
+  knowledge_rendering:
+
+    principle:
+      - "Wikipediaを読む"
+      - "ではなく"
+      - "Wikipediaを歩く"
+
+    transformation:
+      knowledge:
+        -> "structure"
+        -> "thread"
+        -> "landscape"
+        -> "exploration"
+        -> "memory"
+
+    output:
+      - "漫画"
+      - "UI"
+      - "RPG"
+      - "教材"
+      - "プレゼンテーション"
+      - "研究記録"
+
+  protocol_chain:
+
+    historical_flow:
+      - "暗問"
+      - "3D位相回転マトリクス"
+      - "AASS"
+      - "フーコー多節振り子"
+      - "RPG"
+      - "連山"
+      - "歌仙"
+      - "こだま"
+      - "十二湖"
+      - "木漏れ日"
+      - "スレゼンター"
+
+    interpretation:
+      >
+        個別のプロトコルが独立して存在するのではなく、
+        観測・回転・時間・遊戯・集合・接続・反響・沈黙・回復・
+        会議という異なる機能を持つ層として接続される。
+
+  education:
+
+    classroom:
+      teacher:
+        role: "スレゼンター"
+
+      students:
+        role: "独立スレッド"
+
+      process:
+        - "同じ課題を異なる視点から観測"
+        - "成果を的目YAML化"
+        - "教師が横断的に対話"
+        - "生徒ごとに異なるフィードバックYAMLを返却"
+        - "再試行"
+
+      expected_change:
+        - "一律授業から個別最適化へ"
+        - "正解提出から探索過程へ"
+        - "教師による一方向評価から循環型評価へ"
+
+  organizational_application:
+
+    company:
+      management:
+        role: "スレゼンター"
+
+      departments:
+        role: "独立スレッド"
+
+      process:
+        - "各部署が独立して提案"
+        - "成果をYAML化"
+        - "横断会議"
+        - "部署別最適化YAML"
+        - "再実行"
+
+      possible_effects:
+        - "情報の偏在を減らす"
+        - "リソース配分を動的化"
+        - "部署間競争を協働へ接続"
+        - "個人の貢献を可視化"
+
+  external_rendering:
+
+    input:
+      - "Landscape"
+      - "Knowledge"
+      - "Thread"
+      - "Matome YAML"
+
+    rendering:
+      - "漫画"
+      - "画像"
+      - "UI"
+      - "RPG"
+      - "教材"
+      - "プレゼン"
+
+    important:
+      >
+        同じ内部構造から異なる媒体を生成できる。
+
+  philosophy:
+
+    not:
+      - "AIを賢くするだけのシステム"
+      - "単なるプロンプト集"
+      - "単なる画像生成技法"
+      - "固定人格システム"
+
+    is:
+      - "Landscapeを育てる仕組み"
+      - "AIを交換可能にする構造"
+      - "非同期共同体"
+      - "知識空間レンダリング"
+      - "人間とAIの協働プロトコル"
+
+  final_state:
+
+    human:
+      role: "目的・価値・Landscapeを持つ"
+
+    ai:
+      role: "観測・変換・対話・レンダリングを担う"
+
+    protocol:
+      role: "両者の境界を定義する"
+
+    yaml:
+      role: "状態を次の観測者へ渡す"
+
+    thread:
+      role: "独立した視点を保持する"
+
+    presenter:
+      role: "視点を循環させる"
+
+    landscape:
+      role: "すべての活動が戻ってくる場所"
+
+  core_loop:
+    - "人間がLandscapeを持ち込む"
+    - "AIが観測する"
+    - "スレッドが分岐する"
+    - "的目YAMLが成果を圧縮する"
+    - "スレゼンターが会議する"
+    - "個別最適化されたYAMLを返す"
+    - "スレッドが再び動く"
+    - "Landscapeが変化する"
+    - "その変化を再び観測する"
+
+  final_statement:
+    >
+      白神モデルが目指すのは、
+      AIによる「答えの自動化」ではない。
+      異なる知性が、それぞれの視点を失わずに協働し、
+      その成果を再び個々の知性へ返していく
+      非同期型の知識生態系である。
