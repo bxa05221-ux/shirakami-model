@@ -1,0 +1,88 @@
+protocol:
+  id: nursery_resilience.external_landscape_adapter
+  version: "0.1"
+  status: alpha
+  purpose: >-
+    園内Landscapeに、園の所在地・活動予定に関係する外部情報を接続し、
+    保育者の判断材料として提示する。AIは実施可否を決定しない。
+
+principles:
+  - source_first
+  - timestamp_required
+  - human_decision_required
+  - no_automatic_safety_authorization
+  - preserve_source_context
+  - external_information_is_context_not_instruction
+
+sources:
+  weather:
+    provider: 気象庁
+    categories:
+      - 天気予報
+      - 気温
+      - 降水確率
+      - 警報注意報
+      - キキクル
+      - 雨雲の動き
+      - 台風
+      - 防災気象情報
+    official_url: https://www.jma.go.jp/
+  wildlife:
+    provider: 青森県・つがる市
+    categories:
+      - クマ出没
+      - イノシシ等の野生動物情報
+      - 地域の注意喚起
+      - 緊急時の自治体情報
+    official_urls:
+      - https://www.pref.aomori.lg.jp/soshiki/kankyo/shizen/kuma_cyuui.html
+      - https://www.city.tsugaru.aomori.jp/soshiki/keizai/nourin/choju/7339.html
+      - https://www.city.tsugaru.aomori.jp/
+
+packet:
+  fields:
+    - source
+    - source_url
+    - observed_at
+    - published_at
+    - area
+    - category
+    - severity
+    - summary
+    - raw_context
+    - affected_activity
+    - human_decision
+    - decision_at
+
+workflow:
+  - fetch
+  - normalize
+  - timestamp
+  - area_match
+  - activity_match
+  - present_to_staff
+  - human_review
+  - optionally_update_plan
+  - preserve_evidence
+
+rules:
+  weather:
+    outdoor_activity:
+      action: "活動計画との照合を促す"
+    severe_weather:
+      action: "公式防災情報の確認を促す"
+  wildlife:
+    nearby_sighting:
+      action: "戸外活動・散歩ルート等の再確認を促す"
+    warning_or_alert:
+      action: "自治体・県の最新情報を確認し、園長等が判断する"
+
+privacy:
+  child_identifiable_data_must_not_be_sent_to_external_sources: true
+  external_source_results_are_read_only_context: true
+
+outputs:
+  - daily_external_landscape
+  - activity_risk_context
+  - plan_review_prompt
+  - evidence_record
