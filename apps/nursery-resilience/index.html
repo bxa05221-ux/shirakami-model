@@ -1,47 +1,29 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#f6f3ed" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <title>保育レジリエンス α1.0</title>
-  <style>
-    :root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Noto Sans JP",sans-serif;color:#242424;background:#f6f3ed}*{box-sizing:border-box}body{margin:0}.app{max-width:720px;margin:auto;padding:20px 16px 48px}.top{padding:10px 4px 18px}.eyebrow{font-size:12px;letter-spacing:.08em;opacity:.6}.title{font-size:27px;font-weight:750;margin:5px 0}.sub{font-size:14px;opacity:.72}.card{background:#fff;border:1px solid #e4dfd6;border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 3px 14px rgba(0,0,0,.04)}label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}select,textarea,input{width:100%;font:inherit;border:1px solid #d8d3ca;border-radius:12px;padding:12px;background:#fff}textarea{min-height:120px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:12px;padding:12px 15px;font-weight:700;cursor:pointer;background:#242424;color:#fff;margin-top:10px}.btn.secondary{background:#eeeae3;color:#242424}.btn.full{width:100%}.section-title{font-size:17px;font-weight:750;margin:0 0 10px}.thread{border-left:3px solid #d7d0c4;padding-left:14px}.bubble{background:#f8f6f1;border-radius:13px;padding:11px 12px;margin:8px 0}.muted{font-size:12px;opacity:.6}.plan{white-space:pre-wrap;line-height:1.7}.status{font-size:13px;padding:8px 10px;border-radius:10px;background:#f1eee8;margin-top:10px}.nav{display:flex;gap:8px;overflow:auto;padding:4px 0 10px}.nav button{white-space:nowrap;border:1px solid #d8d3ca;background:#fff;border-radius:999px;padding:8px 12px}.hidden{display:none}@media(min-width:600px){.app{padding-top:34px}}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f6f3ed"><meta name="apple-mobile-web-app-capable" content="yes"><title>保育レジリエンス α1.0</title>
+<style>
+:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Noto Sans JP",sans-serif;color:#242424;background:#f6f3ed}*{box-sizing:border-box}body{margin:0}.app{max-width:720px;margin:auto;padding:20px 16px 48px}.top{padding:10px 4px 18px}.eyebrow{font-size:12px;letter-spacing:.08em;opacity:.6}.title{font-size:27px;font-weight:750;margin:5px 0}.sub{font-size:14px;opacity:.72}.card{background:#fff;border:1px solid #e4dfd6;border-radius:18px;padding:18px;margin:12px 0;box-shadow:0 3px 14px rgba(0,0,0,.04)}label{display:block;font-size:13px;font-weight:700;margin:10px 0 7px}select,textarea{width:100%;font:inherit;border:1px solid #d8d3ca;border-radius:12px;padding:12px;background:#fff}textarea{min-height:105px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:12px;padding:12px 15px;font-weight:700;cursor:pointer;background:#242424;color:#fff;margin-top:10px}.btn.secondary{background:#eeeae3;color:#242424}.btn.full{width:100%}.section-title{font-size:17px;font-weight:750;margin:0 0 10px}.thread{border-left:3px solid #d7d0c4;padding-left:14px}.bubble{background:#f8f6f1;border-radius:13px;padding:11px 12px;margin:8px 0}.muted{font-size:12px;opacity:.6}.status{font-size:13px;padding:8px 10px;border-radius:10px;background:#f1eee8;margin-top:10px}.hidden{display:none}.nav{display:flex;gap:8px;overflow:auto;padding:4px 0 10px}.nav button{white-space:nowrap;border:1px solid #d8d3ca;background:#fff;border-radius:999px;padding:8px 12px}.version{font-size:12px;opacity:.55;margin-top:12px}
+</style>
 </head>
-<body>
-<div class="app">
-  <header class="top"><div class="eyebrow">NURSERY RESILIENCE API α1.0</div><div class="title">保育レジリエンス</div><div class="sub">今日の保育から、明日の保育をつくる。</div></header>
-  <nav class="nav"><button onclick="show('observe')">今日の観察</button><button onclick="show('landscape')">Landscape</button><button onclick="show('plan')">明日の計画</button></nav>
-
-  <section id="observe">
-    <div class="card"><h2 class="section-title">今日の観察を記録</h2>
-      <div class="row"><div><label for="child">対象</label><select id="child"><option>Aちゃん</option><option>Bちゃん</option><option>クラス全体</option></select></div><div><label for="context">場面</label><select id="context"><option>自由遊び</option><option>活動の切り替え</option><option>食事</option><option>午睡</option><option>戸外活動</option></select></div></div>
-      <label for="obs" style="margin-top:12px">何がありましたか？</label><textarea id="obs" placeholder="例：片付けの一斉指示では動かなかったが、終了予告後に自分から片付け始めた。"></textarea>
-      <button class="btn full" onclick="record()">観察を保存</button><div id="recordStatus" class="status hidden"></div>
-    </div>
-  </section>
-
-  <section id="landscape" class="hidden">
-    <div class="card"><h2 class="section-title">今日のLandscape</h2><div id="thread" class="thread"></div><button class="btn secondary full" onclick="generateLandscape()">スレゼンターで整理</button></div>
-  </section>
-
-  <section id="plan" class="hidden">
-    <div class="card"><h2 class="section-title">明日の保育計画</h2><p class="muted">AIは案を生成し、最終確定は保育者が行います。</p><button class="btn full" onclick="generatePlan()">明日の計画案を生成</button><div id="planText" class="plan" style="margin-top:14px"></div><button id="approve" class="btn secondary full hidden" onclick="approvePlan()">この計画案を確認・承認</button><div id="approveStatus" class="status hidden"></div></div>
-  </section>
-</div>
+<body><div class="app">
+<header class="top"><div class="eyebrow">NURSERY RESILIENCE API α1.0</div><div class="title">保育レジリエンス</div><div class="sub">今日の保育から、明日の保育をつくる。</div></header>
+<nav class="nav"><button onclick="show('observe')">今日の観察</button><button onclick="show('landscape')">Landscape</button><button onclick="show('plan')">明日の計画</button></nav>
+<section id="observe"><div class="card"><h2 class="section-title">今日の観察を記録</h2><div class="row"><div><label>対象</label><select id="child"><option>Aちゃん</option><option>Bちゃん</option><option>クラス全体</option></select></div><div><label>場面</label><select id="context"><option>自由遊び</option><option>活動の切り替え</option><option>食事</option><option>午睡</option><option>戸外活動</option></select></div></div><label>何がありましたか？</label><textarea id="obs" placeholder="今日の子どもの姿を入力"></textarea><button class="btn full" onclick="record()">観察を保存</button><div id="recordStatus" class="status hidden"></div></div></section>
+<section id="landscape" class="hidden"><div class="card"><h2 class="section-title">今日のLandscape</h2><div id="thread" class="thread"></div><button class="btn secondary full" onclick="renderThread()">スレゼンターで整理</button></div></section>
+<section id="plan" class="hidden"><div class="card"><h2 class="section-title">明日の保育計画</h2><p class="muted">AI案を保育者が編集し、修正版を保存してから承認します。</p><button class="btn full" onclick="generatePlan()">計画案を生成</button><div id="editor" class="hidden"><label>観察ポイント</label><textarea id="pObservation"></textarea><label>環境調整</label><textarea id="pEnvironment"></textarea><label>保育者の援助</label><textarea id="pSupport"></textarea><label>チェックポイント</label><textarea id="pCheck"></textarea><button class="btn full" onclick="saveRevision()">修正版として保存</button><button class="btn secondary full" onclick="approvePlan()">修正版を確認・承認</button></div><div id="planStatus" class="status hidden"></div><div id="history" style="margin-top:14px"></div></div></section>
+<div class="version">Prototype: α1.0 — Human Editing Loop</div></div>
 <script>
 const KEY='nursery-resilience-alpha1';
-function data(){try{return JSON.parse(localStorage.getItem(KEY)||'{"observations":[],"approved":[]}')}catch(e){return {observations:[],approved:[]}}}
+function data(){try{return JSON.parse(localStorage.getItem(KEY)||'{"observations":[],"plans":[]}')}catch(e){return{observations:[],plans:[]}}}
 function save(d){localStorage.setItem(KEY,JSON.stringify(d))}
-function show(id){['observe','landscape','plan'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));if(id==='landscape')renderThread()}
-function record(){const d=data();const child=document.getElementById('child').value,context=document.getElementById('context').value,obs=document.getElementById('obs').value.trim();if(!obs)return alert('観察内容を入力してください。');d.observations.push({date:new Date().toLocaleString('ja-JP'),child,context,text:obs});save(d);document.getElementById('obs').value='';const s=document.getElementById('recordStatus');s.textContent='観察を保存しました。';s.classList.remove('hidden')}
-function renderThread(){const d=data();const el=document.getElementById('thread');if(!d.observations.length){el.innerHTML='<div class="muted">まだ観察がありません。</div>';return}el.innerHTML=d.observations.slice(-8).reverse().map(o=>`<div class="bubble"><div class="muted">${o.date} ・ ${o.child} ・ ${o.context}</div><div>${escapeHtml(o.text)}</div></div>`).join('')}
-function generateLandscape(){renderThread();alert('複数の観察を並べ、職員が対話できるLandscapeとして表示しました。実運用ではここにAI Runtimeの分析・問い返しを接続します。')}
-function generatePlan(){const d=data(), latest=d.observations.slice(-1)[0];const text=latest?`【明日の観察ポイント】\n・${latest.child}の「${latest.context}」での反応を再観察\n・今日の観察「${latest.text}」が再現するか確認\n\n【環境調整案】\n・活動の切り替えを事前に知らせる\n・子どもが見通しを持てる手掛かりを用意する\n\n【保育者の援助案】\n・一斉指示だけに依存しない\n・必要時のみ個別に声をかける\n\n【チェックポイント】\n・自発的な切り替え\n・保育者の介入量\n・子どもの反応の変化\n\n※これは計画案です。保育者が確認して確定してください。`:'観察を1件以上保存すると、翌日の計画案を生成できます。';document.getElementById('planText').textContent=text;document.getElementById('approve').classList.toggle('hidden',!latest)}
-function approvePlan(){const d=data();d.approved.push({date:new Date().toLocaleString('ja-JP')});save(d);const s=document.getElementById('approveStatus');s.textContent='確認・承認を記録しました。';s.classList.remove('hidden')}
-function escapeHtml(s){return s.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-renderThread();
-</script>
-</body></html>
+function show(id){['observe','landscape','plan'].forEach(x=>document.getElementById(x).classList.toggle('hidden',x!==id));if(id==='landscape')renderThread();if(id==='plan')renderHistory()}
+function record(){const d=data(),text=document.getElementById('obs').value.trim();if(!text)return alert('観察内容を入力してください。');d.observations.push({date:new Date().toLocaleString('ja-JP'),child:document.getElementById('child').value,context:document.getElementById('context').value,text});save(d);document.getElementById('obs').value='';const s=document.getElementById('recordStatus');s.textContent='観察を保存しました。';s.classList.remove('hidden')}
+function renderThread(){const el=document.getElementById('thread'),d=data();el.innerHTML=d.observations.length?d.observations.slice(-8).reverse().map(o=>`<div class="bubble"><div class="muted">${o.date} ・ ${o.child} ・ ${o.context}</div><div>${esc(o.text)}</div></div>`).join(''):'<div class="muted">まだ観察がありません。</div>'}
+function generatePlan(){const d=data(),o=d.observations[d.observations.length-1];if(!o)return alert('先に観察を保存してください。');document.getElementById('pObservation').value=`・${o.child}の「${o.context}」での反応を再観察\n・今日の観察「${o.text}」が再現するか確認`;document.getElementById('pEnvironment').value='・活動の切り替えを事前に知らせる\n・子どもが見通しを持てる手掛かりを用意する';document.getElementById('pSupport').value='・一斉指示だけに依存しない\n・必要時のみ個別に声をかける';document.getElementById('pCheck').value='・自発的な切り替え\n・保育者の介入量\n・子どもの反応の変化';document.getElementById('editor').classList.remove('hidden');renderHistory()}
+function currentPlan(){return{observation:document.getElementById('pObservation').value,environment:document.getElementById('pEnvironment').value,support:document.getElementById('pSupport').value,check:document.getElementById('pCheck').value}}
+function saveRevision(){const d=data(),p=currentPlan(),n=d.plans.length+1;d.plans.push({version:`v0.${n}`,type:'human_revision',date:new Date().toLocaleString('ja-JP'),plan:p,based_on:n===1?'AI Draft':d.plans[d.plans.length-1].version});save(d);status('修正版を保存しました。AI案は保持され、修正履歴が残ります。');renderHistory()}
+function approvePlan(){const d=data(),p=currentPlan(),n=d.plans.length+1;d.plans.push({version:`v${n}.0`,type:'approved',date:new Date().toLocaleString('ja-JP'),plan:p,based_on:n===1?'AI Draft':d.plans[d.plans.length-1].version});save(d);status('修正版を承認しました。最終確定は人間が行った記録として保存されました。');renderHistory()}
+function renderHistory(){const el=document.getElementById('history'),d=data();el.innerHTML=d.plans.length?'<div class="muted">計画履歴</div>'+d.plans.slice().reverse().map(p=>`<div class="bubble"><b>${p.version}</b> ・ ${p.type==='approved'?'承認':'修正'} ・ ${p.date}<div class="muted">元：${p.based_on||'—'}</div></div>`).join(''):''}
+function status(t){const s=document.getElementById('planStatus');s.textContent=t;s.classList.remove('hidden')}function esc(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}renderThread();
+</script></body></html>
