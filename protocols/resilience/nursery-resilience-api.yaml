@@ -1,0 +1,253 @@
+api:
+  name: Nursery Resilience API
+  id: nursery-resilience-api
+  version: "0.1.0"
+
+  purpose:
+    - 個別保育計画の策定支援
+    - 発達経過と保育計画の接続
+    - 日々の観察の蓄積
+    - チェックポイントの管理
+    - ヒヤリハットの管理
+    - インシデントの管理
+    - 人員配置と保育負荷の観測
+    - 職員間のLandscape共有
+    - 継続的な保育計画の更新
+    - AIによる観測・整理・問い返し
+    - 翌日の保育計画案生成
+
+  principles:
+    landscape_first: true
+    child_worldview_first: true
+    environment_before_correction: true
+    observation_before_interpretation: true
+    continuity_required: true
+    ai_is_not_decision_maker: true
+    staff_evaluation_is_separated: true
+    diagnosis_is_not_the_purpose: true
+
+  actors:
+    - child
+    - childcare_teacher
+    - support_staff
+    - manager
+    - ai_runtime
+    - presenter
+
+  development_basis:
+    - "遠城寺式発達経過記録表"
+
+  resources:
+    children:
+      operations: [create, read, update]
+    development_records:
+      operations: [create, read, update, compare]
+    observations:
+      operations: [create, read, search, relate]
+    landscapes:
+      operations: [snapshot, compare, observe, trace]
+    childcare_plans:
+      operations: [draft, review, approve, revise, compare, continue]
+    developmental_support:
+      levels:
+        0: observation
+        1: environmental_adjustment
+        2: individual_participation_route
+        3: team_review
+        4: external_support_consideration
+      operations: [assess, suggest, review]
+    safety:
+      types: [checkpoint, hiyari_hat, incident]
+      operations: [record, analyze, review, prevent_recurrence]
+    staffing:
+      operations: [record, plan, simulate, assess_load]
+    activities:
+      operations: [create, update, evaluate]
+    documents:
+      types:
+        - daily_log
+        - childcare_plan
+        - hiyari_hat_report
+        - incident_report
+        - meeting_minutes
+        - response_record
+        - manual_revision
+        - staff_shared_material
+      operations: [draft, review, approve, revise]
+    feedback:
+      operations:
+        - summarize
+        - detect_change
+        - detect_pattern
+        - detect_conflict
+        - suggest_questions
+        - suggest_revision
+    shared_landscape:
+      operations: [aggregate, compare, trace, feedback]
+
+  workflows:
+    daily_observation:
+      process:
+        - record
+        - relate_to_landscape
+        - relate_to_previous_observations
+        - detect_change
+    individual_plan:
+      process:
+        - observe
+        - identify_current_state
+        - identify_developmental_context
+        - formulate_hypothesis
+        - propose_environment
+        - propose_support
+        - define_checkpoints
+        - draft_plan
+        - human_review
+    developmental_support:
+      process:
+        - identify_context
+        - formulate_hypothesis
+        - propose_environmental_adjustment
+        - trial
+        - re_observe
+    safety_loop:
+      process:
+        - classify
+        - record
+        - identify_environmental_factors
+        - identify_staffing_factors
+        - propose_prevention
+        - update_plan
+    staffing_loop:
+      process:
+        - assess_required_attention
+        - assess_available_capacity
+        - detect_load_concentration
+        - propose_adjustment
+    next_day_plan:
+      description: "今日のLandscapeから翌日の保育計画案を生成する"
+      process:
+        - integrate_observations
+        - compare_development
+        - compare_previous_plan
+        - integrate_safety
+        - integrate_staffing
+        - identify_continuity
+        - identify_next_observation
+        - propose_environmental_adjustment
+        - propose_childcare_support
+        - draft_next_day_plan
+        - presenter_review
+        - human_approval
+
+  ai_policy:
+    role:
+      - observation
+      - organization
+      - connection
+      - comparison
+      - question_generation
+      - planning_assistance
+    prohibited_as_final_decision:
+      - diagnosis
+      - child_labeling
+      - staff_evaluation
+      - disciplinary_decision
+      - final_childcare_plan_approval
+      - final_staffing_decision
+    principle: "AIは保育上の最終判断者ではなく、観測・整理・接続・問い返し・計画案生成を行う補助機構である。"
+
+  presenter:
+    role: "職員が理解し対話できるLandscapeへの変換"
+    principle: "観察を一つの結論に潰さず、複数の観測を関係づけ、問いとして返す。"
+
+  github:
+    role:
+      - shared_landscape_memory
+      - version_history
+      - knowledge_continuity
+    not_for:
+      - staff_ranking
+      - personnel_evaluation
+      - surveillance
+    records:
+      - observations
+      - development_records
+      - plan_versions
+      - revisions
+      - reviews
+      - safety_events
+      - landscape_changes
+      - protocol_changes
+      - generated_artifacts
+
+  feedback_loop:
+    - child_landscape
+    - observation
+    - development
+    - childcare_plan
+    - environment
+    - staffing
+    - practice
+    - checkpoint
+    - hiyari_hat
+    - incident
+    - review
+    - shared_landscape
+    - ai_feedback
+    - next_day_plan
+    - next_landscape
+
+  api_endpoints:
+    observations:
+      create: {method: POST, path: /observations}
+      list: {method: GET, path: /observations}
+    children:
+      landscape: {method: GET, path: /children/{child_id}/landscape}
+      development: {method: GET, path: /children/{child_id}/development}
+    childcare_plans:
+      draft: {method: POST, path: /children/{child_id}/plans/draft}
+      next_day_draft: {method: POST, path: /children/{child_id}/plans/next-day/draft}
+      review: {method: POST, path: /children/{child_id}/plans/{plan_id}/review}
+      approve: {method: POST, path: /children/{child_id}/plans/{plan_id}/approve}
+    developmental_support:
+      assess: {method: POST, path: /children/{child_id}/support/assess}
+      suggest: {method: POST, path: /children/{child_id}/support/suggest}
+    safety:
+      checkpoint: {method: POST, path: /safety/checkpoints}
+      hiyari_hat: {method: POST, path: /safety/hiyari-hat}
+      incident: {method: POST, path: /safety/incidents}
+    staffing:
+      assess: {method: POST, path: /staffing/assess}
+      simulate: {method: POST, path: /staffing/simulate}
+    documents:
+      draft: {method: POST, path: /documents/draft}
+      review: {method: POST, path: /documents/{document_id}/review}
+      approve: {method: POST, path: /documents/{document_id}/approve}
+    feedback:
+      observe: {method: POST, path: /feedback/observe}
+      plan: {method: POST, path: /feedback/plan}
+      landscape: {method: GET, path: /feedback/landscape}
+
+  privacy:
+    requirements:
+      - access_control
+      - audit_log
+      - data_minimization
+      - purpose_limitation
+      - separation_of_personnel_evaluation
+      - secure_storage
+
+  versioning:
+    protocol:
+      semantic_versioning: true
+    plan:
+      immutable_history: true
+    observation:
+      original_record_preserved: true
+    rule: "過去の観察・計画・インシデント記録を後から書き換えて履歴を消失させず、修正はRevisionとして記録する。"
+
+  implementation_scope:
+    alpha: "今日の保育の観測から翌日の保育計画案までを安定して循環させる。"
+    pilot_facilities: 3
+    facility_policy: "運営方針・保育文化・組織構造等は導入時にWorkspace Profileへ適応する。"
