@@ -1,0 +1,158 @@
+openapi: 3.0.3
+info:
+  title: Shirakami High School Brass Band API
+  version: 0.1.0
+  description: >
+    未確定な問いをLandscapeへ投入し、複数の観測と時間的蓄積を通して
+    ユーザー自身の再発見を支援する観測インターフェース。
+servers:
+  - url: http://localhost:8000
+paths:
+  /observe:
+    post:
+      summary: 未確定情報をLandscapeへ投入して観測する
+      operationId: observe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/ObserveRequest' }
+      responses:
+        '200':
+          description: Observation result
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ObserveResponse' }
+  /landscape:
+    get:
+      summary: 現在のLandscapeを取得する
+      operationId: getLandscape
+      responses:
+        '200':
+          description: Current landscape
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Landscape' }
+  /dark-layer:
+    get:
+      summary: 未解決問いを取得する
+      operationId: getDarkLayer
+      responses:
+        '200':
+          description: Dark Layer
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/DarkLayer' }
+  /revisit:
+    post:
+      summary: 保留された問いを再観測する
+      operationId: revisit
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/RevisitRequest' }
+      responses:
+        '200':
+          description: Re-observation result
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/RevisitResponse' }
+  /catch:
+    post:
+      summary: ユーザーの再発見を記録する
+      operationId: catch
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/CatchRequest' }
+      responses:
+        '200':
+          description: Catch event
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/CatchResponse' }
+components:
+  schemas:
+    ObserveRequest:
+      type: object
+      required: [input]
+      properties:
+        input: { type: string }
+        mode: { type: string, enum: [normal, rainwater], default: normal }
+        context: { type: object, additionalProperties: true }
+    Observation:
+      type: object
+      required: [observer_id, content]
+      properties:
+        observer_id: { type: string }
+        perspective: { type: string }
+        temperature: { type: number }
+        content: { type: string }
+        uncertainty: { type: string }
+    ObserveResponse:
+      type: object
+      required: [observation_id, landscape_id, observations, unresolved_questions]
+      properties:
+        observation_id: { type: string }
+        landscape_id: { type: string }
+        observations: { type: array, items: { $ref: '#/components/schemas/Observation' } }
+        new_relations: { type: array, items: { type: string } }
+        unresolved_questions: { type: array, items: { type: string } }
+        dark_layer_updates: { type: array, items: { type: string } }
+        next_observation: { type: string, nullable: true }
+    Landscape:
+      type: object
+      required: [landscape_id, current_state, observations, unresolved_questions]
+      properties:
+        landscape_id: { type: string }
+        current_state: { type: object, additionalProperties: true }
+        observations: { type: array, items: { $ref: '#/components/schemas/Observation' } }
+        unresolved_questions: { type: array, items: { type: string } }
+        relations: { type: array, items: { type: string } }
+        history: { type: array, items: { type: object, additionalProperties: true } }
+    DarkLayer:
+      type: object
+      required: [questions]
+      properties:
+        questions:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: string }
+              question: { type: string }
+              origin: { type: string }
+              last_observed: { type: string }
+              status: { type: string }
+    RevisitRequest:
+      type: object
+      required: [question_id]
+      properties:
+        question_id: { type: string }
+    RevisitResponse:
+      type: object
+      properties:
+        question_id: { type: string }
+        previous_observation: { type: string }
+        current_observation: { type: string }
+        new_relations: { type: array, items: { type: string } }
+        landscape_change: { type: object, additionalProperties: true }
+        catch_candidate: { type: string, nullable: true }
+    CatchRequest:
+      type: object
+      required: [question_id, discovery]
+      properties:
+        question_id: { type: string }
+        discovery: { type: string }
+    CatchResponse:
+      type: object
+      properties:
+        catch_id: { type: string }
+        question_id: { type: string }
+        landscape_transition:
+          type: object
+          properties:
+            from: { type: string }
+            to: { type: string }
