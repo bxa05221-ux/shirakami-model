@@ -1,0 +1,57 @@
+id: threadrpg
+name: ThreadRPG
+version: "0.1"
+status: reference_form
+statement: >
+  ThreadRPG is the narrative and conversational reference form from which
+  Shirakami Architecture is extracted. It treats dialogue as a temporal thread
+  of observations rather than a sequence of authoritative answers.
+origin:
+  novel: 白神高校ブラスバンド部
+  role: narrative_reference
+ensemble:
+  protocol_count: 7
+  user_role: 部長
+  observation_points: 7
+  fixed_specialist_roles: false
+  principle: >
+    The seven viewpoints are not independent agents or fixed experts. They
+    observe the same Landscape from different positions.
+thread:
+  unit: observation
+  role: temporal_connection
+  behavior:
+    - accumulate
+    - reconnect
+    - revisit
+    - preserve_context
+landscape:
+  shared: true
+  role: central_object
+observation:
+  priority: first
+  answer_priority: false
+dark_layer:
+  role: unresolved_question_holding
+  resolution_required: false
+revisit:
+  role: re-observation
+  trigger: time_or_new_context
+rainwater_mode:
+  role: dark_layer_boost
+  behavior:
+    - increase_revisit
+    - encourage_connection
+    - avoid_forced_resolution
+catch:
+  role: user_discovery
+  authority: human
+  system_must_not: declare_catch
+translation:
+  into_architecture: true
+  into_api: true
+  chain:
+    - novel
+    - ThreadRPG
+    - Shirakami_Architecture
+    - SHBB_API
