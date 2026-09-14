@@ -1,0 +1,79 @@
+id: shirakami-architecture
+name: Shirakami Architecture
+version: "0.1"
+status: initial_extraction
+origin:
+  novel: 白神高校ブラスバンド部
+  reference_form: ThreadRPG
+purpose:
+  - unresolved questions can remain unresolved
+  - shared Landscape can be observed from multiple viewpoints
+  - observations can accumulate across time
+  - final Catch remains with the human
+principles:
+  observation_first: true
+  answer_first: false
+  human_final_judgment: true
+  model_as_authority: false
+  provider_independent: true
+  runtime_replaceable: true
+  preserve_uncertainty: true
+landscape:
+  role: shared_context
+  contains:
+    - observations
+    - evidence
+    - relations
+    - unresolved_questions
+    - history
+dark_layer:
+  role: unresolved_question_holding
+  behavior:
+    - preserve
+    - revisit
+    - connect
+    - do_not_force_resolution
+observation:
+  role: multi_viewpoint_observation
+  viewpoints: 7
+  fixed_specialist_roles: false
+thread:
+  role: temporal_connection_of_observations
+revisit:
+  role: re-observe_previous_questions
+rainwater_mode:
+  role: dark_layer_boost
+  behavior:
+    - increase_revisit
+    - encourage_connection
+    - avoid_forced_resolution
+catch:
+  role: user_discovery
+  authority: human
+runtime:
+  role: execute_protocol
+model_provider:
+  role: provide_intelligence
+  replaceable: true
+interfaces:
+  human:
+    - novel
+    - conversation
+    - radio
+  machine:
+    - SHBB_API
+  physical:
+    - member_card
+    - QR
+    - NFC
+    - novelty
+flow:
+  - input
+  - observation
+  - landscape_update
+  - dark_layer
+  - revisit
+  - catch
+boundary:
+  reality_modification: false
+  decision_authority: human
