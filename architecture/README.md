@@ -22,6 +22,18 @@ SHBB API
 Runtime / Model Provider
 ```
 
+これは「技術のために物語を作った」という順序ではない。
+
+小説に現れていた構造をThreadRPGとして取り出し、それを一般化してアーキテクチャとし、さらにAPIへ写像する。
+
+## Canonical novel appendix
+
+小説側の正式な付録として、ThreadRPGの構造説明を以下に置く。
+
+- [`narrative/appendix-threadrpg.md`](../narrative/appendix-threadrpg.md)
+
+この付録はドラマ化・映像化の仕様書ではない。『白神高校ブラスバンド部』を、ThreadRPGというもう一つの読み方から捉えるための付録である。
+
 ## Core components
 
 - **Landscape** — 共有される世界・文脈・観測の積層
@@ -39,11 +51,27 @@ Runtime / Model Provider
 
 AIは観測・整理・接続・再観測を支援できるが、現実を変更する権限や、ユーザーの判断を代替する権限を自動的には持たない。
 
+詳細: [`authority.md`](authority.md)
+
 ## ThreadRPG
 
 ThreadRPGは、このアーキテクチャを物語的・対話的に表現するリファレンス形式である。
 
 七人は固定専門家ではなく、同一Landscapeに対する観測点として扱われる。
+
+詳細: [`threadrpg.yaml`](threadrpg.yaml)
+
+## Architecture layers
+
+詳細な層構造は [`layers.md`](layers.md) を参照。
+
+原則は [`principles.md`](principles.md) に固定する。
+
+## Provider independence
+
+Shirakami Architectureは特定のAIモデルを前提としない。
+
+詳細: [`provider-independence.md`](provider-independence.md)
 
 ## Interfaces
 
