@@ -1,16 +1,35 @@
-# SHBB-API v0.1
+# SHBB API
 
-**Shirakami High School Brass Band API**
+**Shirakami High School Brass Band API** — runnable reference implementation.
 
-白神高校ブラスバンド部を「7人のキャラクターAI」としてではなく、未確定な問いをLandscapeへ投入し、観測・蓄積・再観測するためのインターフェースとして実装する最小仕様。
+SHBB is not a seven-character chatbot. It is an interface for placing unresolved questions into a shared Landscape, observing them from multiple viewpoints, revisiting them, and recording the user's own Catch.
 
-## Core endpoints
+## Run locally
 
-- `POST /observe` — 観測開始
-- `GET /landscape` — Landscape取得
-- `GET /dark-layer` — 未解決問い取得
-- `POST /revisit` — 再観測
-- `POST /catch` — ユーザーの再発見を記録
+```bash
+cd shbb-api
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn src.app:app --reload
+```
+
+Then open `http://127.0.0.1:8000/docs` for the interactive API documentation.
+
+## Endpoints
+
+- `GET /health` — runtime health check
+- `POST /observe` — place an input into observation
+- `GET /landscape` — inspect the current Landscape snapshot
+- `GET /dark-layer` — inspect unresolved questions and revisits
+- `POST /revisit` — return to an unresolved question
+- `POST /catch` — record the user's Catch
+
+## Runtime boundary
+
+The current implementation is intentionally provider-neutral and in-memory. It proves the HTTP contract and Landscape flow without requiring an LLM. A future Model Provider adapter can enrich `/observe` and `/revisit` while preserving the public SHBB interface.
+
+This is **v0.1 runnable reference**, not a production deployment or durable storage layer.
 
 ## Design rules
 
@@ -28,15 +47,3 @@
 `normal`: 通常の観測。
 
 `rainwater`: Dark Layerの活動を高め、問いの再観測・接続を促進するBoost Mode。強制解決は行わない。
-
-## Boundary
-
-このAPIは「回答API」ではない。問いが別の問い・観測・Landscapeと接続できる状態を維持することを中心機能とする。
-
-## Narrative / Physical interface
-
-SHBB-APIは、白神高校ブラスバンド部という同一Landscapeに対するMachine Interfaceである。小説はHuman/Narrative Interface、将来的な部員証・カード等のノベルティはPhysical Interfaceとして接続できる。
-
-## Status
-
-v0.1 / implementation-oriented draft
