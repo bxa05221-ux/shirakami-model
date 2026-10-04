@@ -1,0 +1,52 @@
+name: Human Gate Status Consistency
+
+on:
+  push:
+    branches:
+      - audit/human-gate-evidence-record
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  status-consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify approved Human Gate status is reflected in canonical documents
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          canonical="docs/CANONICAL_MODEL_v0.2.md"
+          coverage="docs/INVARIANT_COVERAGE_v0.1.md"
+          decision="docs/HUMAN_GATE_DECISION_RECORD_v0.1.md"
+          contract="docs/HUMAN_GATE_STATUS_CONTRACT_v0.1.md"
+
+          for f in "$canonical" "$coverage" "$decision" "$contract"; do
+            test -f "$f" || { echo "Missing required Human Gate document: $f"; exit 1; }
+          done
+
+          grep -Fq 'Decision: APPROVED WITH SCOPE' "$decision"
+          grep -Fq 'human_gate_status: APPROVED' "$decision"
+          grep -Fq 'core_promotion: true' "$decision"
+
+          grep -Fq 'Decision: APPROVED WITH SCOPE' "$canonical"
+          grep -Fq 'Status: reviewed Core scope approved' "$canonical"
+          grep -Fq 'Human Gate decision: **APPROVED WITH SCOPE**' "$coverage"
+          grep -Fq 'Status: approved within the 2026-10-05 Human Gate decision scope' "$contract"
+
+          ! grep -Fq 'Human Gate decision: pending' "$canonical"
+          ! grep -Fq 'Status: draft / review required' "$canonical"
+          ! grep -Fq 'Human Gate decision: pending' "$coverage"
+
+          for invariant in C-01 C-02 C-03 C-04 C-05 C-07 C-10; do
+            grep -Fq "$invariant" "$decision"
+          done
+
+          for invariant in C-06 C-08 C-09; do
+            grep -Fq "$invariant" "$decision"
+          done
+
+          echo "Human Gate status consistency: PASS"
