@@ -257,6 +257,17 @@ Verification may establish evidence about results but does not itself authorize 
 
 Runtime/provider implementation is replaceable and must not redefine Core authority semantics.
 
+**Verification status: PASS (implementation evidence).**
+
+- OS test: `runtime/test_runtime_replaceability.py`
+- CI workflow: `.github/workflows/core-invariants.yml`
+- CI result: **3 passed**
+- Verified commit: `80a9ca239130965f1cd8feb117872910df357be2`
+- The test exercises both direct Runtime replacement and an `EvidenceDrivenRuntime(runtime=...)` composition boundary.
+- The test also executes the full EvidenceDrivenRuntime path through the alternate Runtime and verifies successful verification without `authority_granted` or `decision_authorized`.
+
+This is implementation/test evidence, not Human Gate approval of the Core model.
+
 ### C-09 — Evidence Replayability
 
 Recorded Evidence must remain usable for the defined replay/reconstruction path.
