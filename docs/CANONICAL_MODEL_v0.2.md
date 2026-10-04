@@ -245,6 +245,17 @@ Context and Semantic Handoff carry state but do not grant authority.
 
 Missing or unresolved semantics must remain explicit rather than silently becoming certainty.
 
+**Verification status: PASS (implementation evidence).**
+
+- OS test: `runtime/test_evolution_bridge.py`
+- CI workflow: `.github/workflows/core-invariants.yml`
+- CI result: **9 passed**
+- Verified commit: `2540777a332792a1f1eccbfe9cad86d9fd5e321f`
+- `VerificationResult.as_mapping()` preserves the explicit uncertainty field.
+- Deterministic tests verify that uncertainty values such as `high` and `unresolved` are not dropped or converted into authority/decision fields.
+
+This is implementation/test evidence, not Human Gate approval of the Core model.
+
 ### C-06 — Structural/semantic separation
 
 Structural validation cannot establish domain truth.
