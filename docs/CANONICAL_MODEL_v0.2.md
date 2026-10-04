@@ -1,63 +1,51 @@
 # Shirakami Canonical Model v0.2
 
-Status: draft / review required  
+Status: reviewed Core scope approved / supporting principles retained  
 Date: 2026-10-05
-
-## 1. Purpose
 
 This document integrates the current Canonical Model Map, Evidence Contract, Protocol Contract, Context/Handoff Contract, and Matome YAML traceability work into one model-level reference.
 
 It is intentionally a **reference model**, not a single implementation schema. Runtime, representation, and provider-specific details remain replaceable.
 
-## 2. Core proposition
+## 1. Core proposition
 
 Shirakami is a human-authoritative AI architecture in which AI and Runtime components may observe, analyze, propose, execute authorized protocols, and verify results, while final authority remains outside those components at the Human Gate.
 
 > AI may increase the quality of reasoning without acquiring the right to decide.
 
-## 3. Canonical layers
+## 2. Canonical layers
 
 ### L0 — Human Authority
-
 Final authority, approval, rejection, revision, and authorization.
 
 ### L1 — Landscape
-
 The relevant external/internal situation from which observations are made. Landscape is not synonymous with model state.
 
 ### L2 — Observation
-
 A bounded representation of what has been observed. Observation must remain distinguishable from interpretation and authority.
 
 ### L3 — Evidence
-
 Immutable, non-authoritative records retained for verification, replay, audit, and reconstruction. Evidence can inform authority but cannot become authority.
 
 ### L4 — Context / Handoff
-
 State required to interpret and continue work across loop boundaries. `ContextSnapshot` is an immutable runtime representation. Semantic Handoff transfers context while preserving provenance, uncertainty, assumptions, and unresolved meaning.
 
 ### L5 — Protocol Candidate
-
 A structured proposal derived from observations/context. Candidate status is explicitly non-authoritative and non-executable until Human Gate authorization.
 
 ### L6 — Human Gate
-
 The authority boundary. Candidate/Protocol information may be reviewed, rejected, revised, or approved. No lower layer may silently create authority.
 
 ### L7 — Authorized Protocol
-
 A protocol explicitly authorized through the Human Gate. Authorization is distinct from structural validity and from eventual execution correctness.
 
 ### L8 — Runtime / Adapter
-
 Executes authorized Protocols using replaceable runtime/provider components. Runtime must not manufacture Human authority.
 
 ### L9 — Verification
-
 Checks observed execution/results against the relevant Protocol, Evidence, and Context. Verification may produce mismatch/uncertainty Evidence but does not itself authorize the next action.
 
-## 4. Canonical loop
+## 3. Canonical loop
 
 ```text
 Landscape
@@ -84,7 +72,7 @@ Human Gate
           ↺
 ```
 
-## 5. Authority invariant
+## 4. Authority invariant
 
 The following components are non-authoritative by default:
 
@@ -100,7 +88,7 @@ The following components are non-authoritative by default:
 
 Only the defined Human Gate path may grant decision/execution authority.
 
-## 6. Four-way separation
+## 5. Four-way separation
 
 Shirakami explicitly separates:
 
@@ -116,7 +104,7 @@ Verified outcome
 
 A valid representation is not necessarily true. A plausible interpretation is not approval. An approved protocol is not a verified outcome.
 
-## 7. Evidence contract
+## 6. Evidence contract
 
 Currently modeled guarantees:
 
@@ -139,7 +127,7 @@ Not currently canonical guarantees:
 
 Those properties require concrete requirements, implementation, deterministic tests, and Human Gate review before promotion into the Core model.
 
-## 8. Protocol contract
+## 7. Protocol contract
 
 A Protocol Candidate must remain:
 
@@ -149,19 +137,9 @@ authority = false
 executable = false
 ```
 
-Candidate generation must not silently:
+Candidate generation must not silently rank, select, prioritize, approve, promote, activate, mutate Landscape, invent domain facts, or convert uncertainty into certainty.
 
-- rank;
-- select;
-- prioritize;
-- approve;
-- promote;
-- activate;
-- mutate Landscape;
-- invent domain facts;
-- convert uncertainty into certainty.
-
-## 9. Context and Handoff contract
+## 8. Context and Handoff contract
 
 Context carries the state required to interpret or continue work. A Semantic Handoff must preserve, where available:
 
@@ -177,7 +155,7 @@ Context carries the state required to interpret or continue work. A Semantic Han
 
 Context does not grant authority.
 
-## 10. Representation boundary
+## 9. Representation boundary
 
 The semantic contract is authoritative over any particular serialization format.
 
@@ -193,19 +171,20 @@ Runtime implementation
 
 The current Matome YAML implementation is a compact Protocol IR and must not be mistaken for the complete v3.2 conceptual model.
 
-## 11. Model v3.2 relationship
+## 10. Model v3.2 relationship
 
 `shirakami-model-v3.2.yaml` remains valuable as the broader conceptual/collaboration architecture. Its Thread, Presenter, Conference, Optimization, RPG, education, organizational, and rendering concepts should not automatically become Core Runtime primitives.
 
 The v0.2 Canonical Model therefore distinguishes:
 
-- **Core:** authority, Landscape, Observation, Evidence, Context, Protocol Candidate, Human Gate, Authorized Protocol, Runtime, Verification;
+- **Reviewed Core:** C-01, C-02, C-03, C-04, C-05, C-07, C-10;
+- **Core Supporting Principles:** C-06, C-08, C-09;
 - **Collaboration:** Thread, Presenter, Conference, optimization and related coordination constructs;
 - **Application:** education, organization, RPG and domain profiles;
 - **Representation:** 的目YAML and other serializations;
 - **Research:** unresolved temporal, causal, conflict, concurrency, and provider-specific questions.
 
-## 12. Traceability requirement
+## 11. Traceability requirement
 
 Every Core concept should eventually map to:
 
@@ -223,83 +202,27 @@ Evidence / audit artifact
 
 Missing links are reported as gaps rather than inferred.
 
-## 13. Core invariants proposed for review
+## 12. Core invariant decision
 
-### C-01 — Human Authority
+The 2026-10-05 Human Gate decision promoted the following seven invariants to Reviewed Core:
 
-AI/Runtime components cannot independently acquire final decision authority.
+- C-01 — Human Authority
+- C-02 — Evidence Non-Authority
+- C-03 — Candidate Non-Authority
+- C-04 — Context Non-Authority
+- C-05 — Uncertainty Preservation
+- C-07 — Verification Non-Authority
+- C-10 — Human Gate for Promotion
 
-### C-02 — Evidence Non-Authority
+The following remain Core Supporting Principles rather than equivalent Reviewed Core invariants:
 
-Evidence may inform authority but cannot become authority.
+- C-06 — Structural/Semantic Separation
+- C-08 — Runtime Replaceability
+- C-09 — Evidence Replayability
 
-### C-03 — Candidate Non-Authority
+Promotion is scoped. It does not mean semantic truth, production readiness, security certification, external validation, patentability, or universal interoperability.
 
-A Protocol Candidate is a proposal, not approval or execution authority.
-
-### C-04 — Context Non-Authority
-
-Context and Semantic Handoff carry state but do not grant decision power.
-
-**Verification status: PASS (implementation evidence).**
-
-- OS test: runtime/test_core_invariants.py
-- CI workflow: .github/workflows/core-invariants.yml
-- CI run: 37231397388
-- CI result: 12 passed in 0.17s
-- Verified PR: #566
-- Verified head: 01974bfaf75bdd23e7d15e2b8446d6ec5a28117a
-- Tests cover non-promotion of authority-like metadata, absence of decision attributes, and ContextSnapshot immutability.
-
-This is implementation/test evidence, not model approval.
-
-### C-05 — Uncertainty Preservation
-
-Missing or unresolved semantics must remain explicit rather than silently becoming certainty.
-
-**Verification status: PASS (implementation evidence).**
-
-- OS test: `runtime/test_evolution_bridge.py`
-- CI workflow: `.github/workflows/core-invariants.yml`
-- CI result: **9 passed**
-- Verified commit: `2540777a332792a1f1eccbfe9cad86d9fd5e321f`
-- `VerificationResult.as_mapping()` preserves the explicit uncertainty field.
-- Deterministic tests verify that uncertainty values such as `high` and `unresolved` are not dropped or converted into authority/decision fields.
-
-This is implementation/test evidence, not Human Gate approval of the Core model.
-
-### C-06 — Structural/semantic separation
-
-Structural validation cannot establish domain truth.
-
-### C-07 — Verification Non-Authority
-
-Verification may establish evidence about results but does not itself authorize subsequent action.
-
-### C-08 — Runtime Replaceability
-
-Runtime/provider implementation is replaceable and must not redefine Core authority semantics.
-
-**Verification status: PASS (implementation evidence).**
-
-- OS test: `runtime/test_runtime_replaceability.py`
-- CI workflow: `.github/workflows/core-invariants.yml`
-- CI result: **3 passed**
-- Verified commit: `80a9ca239130965f1cd8feb117872910df357be2`
-- The test exercises both direct Runtime replacement and an `EvidenceDrivenRuntime(runtime=...)` composition boundary.
-- The test also executes the full EvidenceDrivenRuntime path through the alternate Runtime and verifies successful verification without `authority_granted` or `decision_authorized`.
-
-This is implementation/test evidence, not Human Gate approval of the Core model.
-
-### C-09 — Evidence Replayability
-
-Recorded Evidence must remain usable for the defined replay/reconstruction path.
-
-### C-10 — Human Gate for Promotion
-
-Promotion from candidate/review state to authorized state requires the defined Human Gate path.
-
-## 13.1 — Unified invariant audit evidence
+## 13. Unified invariant audit evidence
 
 A unified CI audit was executed against the C-01 through C-10 evidence test set on 2026-10-05.
 
@@ -308,9 +231,8 @@ A unified CI audit was executed against the C-01 through C-10 evidence test set 
 - CI run: **37232354912**
 - Result: **48 passed in 0.68s**
 - Audit commit: `cdba16e2471ead3aea74cd2e7cb97f8ecfb86363`
-- The CI job required `pytest` and `PyYAML` and executed the identified deterministic tests together in a clean GitHub Actions environment.
 
-The unified result strengthens the implementation/test evidence chain for C-01 through C-10. It does not constitute semantic truth, production certification, external validation, patentability, or Human Gate approval. PR #568 remains Draft/Open and must not be merged without the defined Human Gate decision.
+The unified result strengthens the implementation/test evidence chain. It does not constitute semantic truth, production certification, external validation, patentability, or universal interoperability. The separate Human Gate decision is recorded in `docs/HUMAN_GATE_DECISION_RECORD_v0.1.md`.
 
 ## 14. Open model questions
 
@@ -320,6 +242,8 @@ The unified result strengthens the implementation/test evidence chain for C-01 t
 4. Conflict and concurrent merge semantics.
 5. Exact normative mapping of all Core invariants to R0100/tests.
 6. Criteria for moving a collaboration/application concept into Core.
+
+These remain research/extension questions and are not silently promoted by this decision.
 
 ## 15. Promotion rule
 
@@ -335,5 +259,8 @@ No unresolved research question becomes a Core invariant merely because it appea
 ## 16. Human Gate
 
 Required: true  
-Decision: pending  
-Status: draft / review required
+Decision: APPROVED WITH SCOPE  
+Status: reviewed Core scope approved  
+Reviewed Core: C-01, C-02, C-03, C-04, C-05, C-07, C-10  
+Supporting Principles: C-06, C-08, C-09  
+Decision record: `docs/HUMAN_GATE_DECISION_RECORD_v0.1.md`
