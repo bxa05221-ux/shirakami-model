@@ -241,6 +241,22 @@ A Protocol Candidate is a proposal, not approval or execution authority.
 
 Context and Semantic Handoff carry state but do not grant authority.
 
+### C-04 — Context Non-Authority
+
+Context and Semantic Handoff carry state but do not grant decision power.
+
+**Verification status: PASS (implementation evidence).**
+
+- OS test: runtime/test_core_invariants.py
+- CI workflow: .github/workflows/core-invariants.yml
+- CI run: 37231397388
+- CI result: 12 passed in 0.17s
+- Verified PR: #566
+- Verified head: 01974bfaf75bdd23e7d15e2b8446d6ec5a28117a
+- Tests cover non-promotion of authority-like metadata, absence of decision attributes, and ContextSnapshot immutability.
+
+This is implementation/test evidence, not model approval.
+
 ### C-05 — Uncertainty Preservation
 
 Missing or unresolved semantics must remain explicit rather than silently becoming certainty.
