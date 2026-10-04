@@ -299,6 +299,19 @@ Recorded Evidence must remain usable for the defined replay/reconstruction path.
 
 Promotion from candidate/review state to authorized state requires the defined Human Gate path.
 
+## 13.1 — Unified invariant audit evidence
+
+A unified CI audit was executed against the C-01 through C-10 evidence test set on 2026-10-05.
+
+- OS PR: #568 (draft, not merged)
+- CI workflow: `Core Invariant Full Audit`
+- CI run: **37232354912**
+- Result: **48 passed in 0.68s**
+- Audit commit: `cdba16e2471ead3aea74cd2e7cb97f8ecfb86363`
+- The CI job required `pytest` and `PyYAML` and executed the identified deterministic tests together in a clean GitHub Actions environment.
+
+The unified result strengthens the implementation/test evidence chain for C-01 through C-10. It does not constitute semantic truth, production certification, external validation, patentability, or Human Gate approval. PR #568 remains Draft/Open and must not be merged without the defined Human Gate decision.
+
 ## 14. Open model questions
 
 1. Canonical provenance fields across Evidence, ContextSnapshot, and Semantic Handoff.
