@@ -7,16 +7,16 @@ This matrix separates model claims from implementation evidence. A PASS means de
 
 | ID | Invariant | Normative statement | Implementation/test evidence | CI evidence | Status |
 |---|---|---|---|---|---|
-| C-01 | Human Authority | AI/Runtime cannot independently acquire final authority. | Existing authority-boundary implementation/tests | Existing Core verification | PASS |
-| C-02 | Evidence Non-Authority | Evidence informs authority but cannot become authority. | Evidence model + authority-boundary tests | Existing Core verification | PASS |
-| C-03 | Candidate Non-Authority | Candidate remains proposal, not approval/execution authority. | Candidate authority/executable constraints + tests | Existing Core verification | PASS |
+| C-01 | Human Authority | AI/Runtime cannot independently acquire final authority. | `api/test_boundary.py::test_human_gate_cannot_be_disabled`; `runtime/test_evolution_loop.py::test_human_gate_blocks_without_approval`; `runtime/test_api.py::test_human_gate_requires_explicit_authorization` | Repository verification exists; no isolated current run identifier recorded in this matrix | PASS |
+| C-02 | Evidence Non-Authority | Evidence informs authority but cannot become authority. | `runtime/test_evidence.py` (stable identity); `runtime/test_execution_evidence_projection.py` (immutability); `runtime/test_evidence_landscape_boundary.py` (Evidence/Landscape boundary); `reviewer/test_evidence_promotion.py` (promotion boundary) | Repository verification exists; no isolated current run identifier recorded in this matrix | PASS |
+| C-03 | Candidate Non-Authority | Candidate remains proposal, not approval/execution authority. | `tests/test_observation_candidate.py::test_candidate_is_not_authorized_or_executable`; `tests/test_oppai_candidate_discovery.py::test_candidate_discovery_does_not_activate_a_protocol`; `tests/test_approval_envelope_provenance.py` candidate identity/authority checks | Repository verification exists; no isolated current run identifier recorded in this matrix | PASS |
 | C-04 | Context Non-Authority | Context/Handoff carries state but does not grant authority. | `runtime/test_core_invariants.py`: serialization, absent authority attributes, immutability | Run 37231397388: **12 passed** | PASS |
 | C-05 | Uncertainty Preservation | Unresolved semantics remain explicit. | `runtime/test_evolution_bridge.py`: uncertainty preservation/non-authority | Verified CI: **9 passed**, commit `2540777a...` | PASS |
-| C-06 | Structural/Semantic Separation | Structural validity does not establish domain truth. | Existing validation/model separation tests | Existing verification | PASS |
-| C-07 | Verification Non-Authority | Verification does not authorize subsequent action. | Verification/candidate boundary tests | Existing Core verification | PASS |
+| C-06 | Structural/Semantic Separation | Structural validity does not establish domain truth. | `tests/test_structural_validation_human_gate.py` (structural validation vs approval); `tests/test_pipeline_runner.py` (pipeline identity/order are not authority); `runtime/test_evidence_landscape_boundary.py` (runtime does not own Evidence meaning) | Repository verification exists; no isolated current run identifier recorded in this matrix | PASS |
+| C-07 | Verification Non-Authority | Verification does not authorize subsequent action. | `runtime/test_agent_activity_verification.py::test_verification_updates_trace_without_granting_authority`; `runtime/test_trace.py::test_verification_creates_new_immutable_trace_revision`; `tests/test_pipeline_runner.py` verification/authority checks | Repository verification exists; no isolated current run identifier recorded in this matrix | PASS |
 | C-08 | Runtime Replaceability | Runtime/provider is replaceable and cannot redefine authority semantics. | `runtime/test_runtime_replaceability.py`, including EvidenceDrivenRuntime alternate runtime path | Verified CI: **3 passed**, commit `80a9ca23...` | PASS |
-| C-09 | Evidence Replayability | Evidence remains usable for defined replay/reconstruction. | Existing evidence/replay implementation and tests | Existing verification | PASS |
-| C-10 | Human Gate for Promotion | Promotion to authorized state requires Human Gate. | Existing Human Gate/promotion boundary implementation | Existing verification | PASS |
+| C-09 | Evidence Replayability | Evidence remains usable for defined replay/reconstruction. | `runtime/test_landscape_replay_determinism.py::test_evidence_replay_reconstructs_identical_landscape`; `runtime/evidence_replay.py`; `runtime/replay.py`; `runtime/evidence_checkpoint.py` | Repository verification exists; no isolated current run identifier recorded in this matrix | PASS |
+| C-10 | Human Gate for Promotion | Promotion to authorized state requires Human Gate. | `reviewer/test_evidence_promotion.py::test_human_gate_approval_returns_existing_immutable_records`; `runtime/test_approval_envelope_human_gate.py`; `runtime/test_api.py::test_human_gate_requires_explicit_authorization` | Repository verification exists; no isolated current run identifier recorded in this matrix | PASS |
 
 ## Evidence levels
 
@@ -29,6 +29,10 @@ This matrix separates model claims from implementation evidence. A PASS means de
 
 Technical coverage of C-01 through C-10 is currently assessed as **PASS for implementation/test evidence** based on the audit record.
 
+The refinement completed here replaces broad “Existing verification” labels with concrete test paths for C-01, C-02, C-03, C-06, C-07, C-09, and C-10. This improves traceability, but it does **not** claim that those tests were all re-executed in the current audit run.
+
+C-04, C-05, and C-08 have isolated recent CI evidence recorded above.
+
 This is deliberately not equivalent to:
 
 - semantic truth;
@@ -37,8 +41,6 @@ This is deliberately not equivalent to:
 - external validation;
 - patentability;
 - Human Gate approval.
-
-The next audit should replace broad "Existing verification" labels with exact test paths and CI run/commit identifiers for C-01, C-02, C-03, C-06, C-07, C-09, and C-10. Until that refinement is complete, those rows are traceability references rather than newly re-executed evidence.
 
 ## Promotion rule
 
