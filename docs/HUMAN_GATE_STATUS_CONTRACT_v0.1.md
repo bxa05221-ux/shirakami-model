@@ -1,6 +1,6 @@
 # Human Gate Status Contract v0.1
 
-Status: draft / review required
+Status: approved within the 2026-10-05 Human Gate decision scope
 Date: 2026-10-05
 
 ## 1. Purpose
@@ -40,15 +40,29 @@ The following must never imply APPROVED:
 - API success;
 - pull-request approval by automation.
 
-## 5. Current state
+## 5. Current decision state
 
-For C-01 through C-10:
+The 2026-10-05 Human Gate decision approved only the selected Reviewed Core set:
 
     technical_audit: PASS
-    human_gate_status: REVIEW_PENDING
-    core_promotion: false
+    human_gate_status: APPROVED
+    core_promotion: true
 
-The unified audit result is evidence for technical_audit, not a value for human_gate_status.
+Reviewed Core:
+- C-01
+- C-02
+- C-03
+- C-04
+- C-05
+- C-07
+- C-10
+
+Supporting Core Principles:
+- C-06
+- C-08
+- C-09
+
+This does not approve the three supporting principles as equivalent Reviewed Core invariants.
 
 ## 6. Approval record
 
@@ -60,7 +74,7 @@ An approval is valid only when a human records:
 - date;
 - identity/signature appropriate to the governing process.
 
-Until these fields exist, core_promotion remains false.
+The approval record is docs/HUMAN_GATE_DECISION_RECORD_v0.1.md.
 
 ## 7. Change control
 
@@ -72,10 +86,10 @@ The following implication is normative:
 
     CI_PASS != HUMAN_GATE_APPROVED
 
-More strongly: technical evidence may satisfy a review prerequisite but can never satisfy the authorization event itself.
+Technical evidence may satisfy a review prerequisite but can never satisfy the authorization event itself.
 
 ## 9. Relationship to canonical model
 
 This contract operationalizes C-01 Human Authority, C-10 Human Gate for Promotion, and the four-way separation between structural validity, semantic truth, human authorization, and verified outcome.
 
-It does not itself approve C-01 through C-10.
+The 2026-10-05 decision promotes the seven selected invariants within the stated scope and conditions.
