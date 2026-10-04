@@ -239,10 +239,6 @@ A Protocol Candidate is a proposal, not approval or execution authority.
 
 ### C-04 — Context Non-Authority
 
-Context and Semantic Handoff carry state but do not grant authority.
-
-### C-04 — Context Non-Authority
-
 Context and Semantic Handoff carry state but do not grant decision power.
 
 **Verification status: PASS (implementation evidence).**
