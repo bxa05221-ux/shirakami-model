@@ -84,6 +84,14 @@ It aims to create an environment in which people can understand, choose, and use
 
 > **Do not make AI smarter. Make it possible for people to use AI on their own terms.**
 
+## Experimental Semantic Handoff v0.2 common foundation
+
+Shirakami Model registers [Semantic Handoff v0.2](https://github.com/bxa05221-ux/github-context-bridge/tree/e5442dffb3451766d5ed15ee1e208d420c6321ef) as an **experimental common foundation** for structured handoff records across existing components. The reference is pinned to commit `e5442dffb3451766d5ed15ee1e208d420c6321ef` (source implementation head `ed3a13c2a48426b16dffab1666fca745a83de21f`).
+
+It is additive: it does not revise Shirakami Model's core theory or replace an existing protocol. It preserves the Human Gate, immutable Evidence, `execution_permitted: false`, and prohibition of reality mutation.
+
+This registration is not evidence of cross-AI semantic preservation, authentication or approval authenticity, or external communication. Its OS-side registration and fixture integration remain non-executing and do not claim control of external AI, providers, deployment, publication, billing, or authentication.
+
 ## Related repositories
 
 - [shirakami-OS](https://github.com/bxa05221-ux/shirakami-OS) — Foundation / Runtime / Implementation
